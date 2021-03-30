@@ -205,8 +205,8 @@
         }
 
         pub fn look_at(&mut self, eye: &Vector3, center: &Vector3, up: &Vector3) {
-            let mut u = Vector3::zero();
-            let mut v = Vector3::zero();
+            let mut u = Vector3::new();
+            let mut v = Vector3::new();
             let mut w = Vector3::from_vec3(eye);
 
             // the w vector is computed by w = eye - center which means

@@ -2,16 +2,12 @@ use crate::Vector3;
 
 impl Vector3 {
 
-    pub fn zero() -> Vector3 {
+    pub fn new() -> Vector3 {
         Vector3 {x: 0.0, y: 0.0, z: 0.0}
     }
 
-    pub fn new(x: f32, y: f32, z: f32) -> Vector3 {
-        Vector3 {x: x, y: y, z: z}
-    }
-
     pub fn from_vec3(vec: &Vector3) -> Vector3 {
-        Vector3::new(vec.x, vec.y, vec.z)
+        Vector3 {x:vec.x, y:vec.y, z:vec.z}
     }
 
     pub fn normalize(&mut self) -> &mut Vector3 {
@@ -84,13 +80,19 @@ fn z_up_defined_correctly() {
     assert_eq!(Z_UP.z, 1.0);
 }
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
+#[test]
+fn test_new_vector3() {
+    let m = Vector3::new();
+    assert_eq!(m.x, 0.0);
+    assert_eq!(m.y, 0.0);
+    assert_eq!(m.z, 0.0);
 }
 
-
-//}
+#[test]
+fn test_new_vector3_assignment() {
+    let m = Vector3{x:1.0, y:2.0, z:3.0};
+    let k = Vector3::from_vec3(&m);
+    assert_eq!(k.x, 1.0);
+    assert_eq!(k.y, 2.0);
+    assert_eq!(k.z, 3.0);
+}
