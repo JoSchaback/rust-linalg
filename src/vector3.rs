@@ -10,6 +10,15 @@ impl Vector3 {
         Vector3 {x:vec.x, y:vec.y, z:vec.z}
     }
 
+    pub fn from(x:f32, y:f32, z:f32) -> Vector3 {
+        Vector3 {x:x, y:y, z:z}
+    }
+
+
+    pub fn from_i32(x:i32, y:i32, z:i32) -> Vector3 {
+        Vector3 {x:x as f32, y:y as f32, z:z as f32}
+    }
+
     pub fn normalize(&mut self) -> &mut Vector3 {
 
         let d = ( self.x*self.x + self.y*self.y + self.z*self.z ) .sqrt();
