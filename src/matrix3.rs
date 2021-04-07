@@ -38,6 +38,32 @@
             self.transpose();
         }
 
+        pub fn clone(&self) -> Matrix3 {
+            Matrix3{
+                m_0_0 : self.m_0_0,
+                m_0_1 : self.m_0_1,
+                m_0_2 : self.m_0_2,
+                m_1_0 : self.m_1_0,
+                m_1_1 : self.m_1_1,
+                m_1_2 : self.m_1_2,
+                m_2_0 : self.m_2_0,
+                m_2_1 : self.m_2_1,
+                m_2_2 : self.m_2_2
+            }
+        }
+
+        pub fn set_with_matrix3(&mut self, m:&Matrix3) {
+            self.m_0_0 = m.m_0_0;
+            self.m_0_1 = m.m_0_1;
+            self.m_0_2 = m.m_0_2;
+            self.m_1_0 = m.m_1_0;
+            self.m_1_1 = m.m_1_1;
+            self.m_1_2 = m.m_1_2;
+            self.m_2_0 = m.m_2_0;
+            self.m_2_1 = m.m_2_1;
+            self.m_2_2 = m.m_2_2;
+        }
+
         pub fn inverse(&mut self) {
             let a = self.m_0_0;
             let b = self.m_1_0;

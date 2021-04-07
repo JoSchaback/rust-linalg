@@ -194,6 +194,45 @@
             self.m_3_3 = 1.0;
         }
 
+        pub fn clone(&self) -> Matrix4 {
+            Matrix4{
+                m_0_0 : self.m_0_0,
+                m_0_1 : self.m_0_1,
+                m_0_2 : self.m_0_2,
+                m_0_3 : self.m_0_3,
+                m_1_0 : self.m_1_0,
+                m_1_1 : self.m_1_1,
+                m_1_2 : self.m_1_2,
+                m_1_3 : self.m_1_3,
+                m_2_0 : self.m_2_0,
+                m_2_1 : self.m_2_1,
+                m_2_2 : self.m_2_2,
+                m_2_3 : self.m_2_3,
+                m_3_0 : self.m_3_0,
+                m_3_1 : self.m_3_1,
+                m_3_2 : self.m_3_2,
+                m_3_3 : self.m_3_3}
+        }        
+
+        pub fn set_with_matrix4(&mut self, m:&Matrix4) {
+            self.m_0_0 = m.m_0_0;
+            self.m_0_1 = m.m_0_1;
+            self.m_0_2 = m.m_0_2;
+            self.m_0_3 = m.m_0_3;
+            self.m_1_0 = m.m_1_0;
+            self.m_1_1 = m.m_1_1;
+            self.m_1_2 = m.m_1_2;
+            self.m_1_3 = m.m_1_3;
+            self.m_2_0 = m.m_2_0;
+            self.m_2_1 = m.m_2_1;
+            self.m_2_2 = m.m_2_2;
+            self.m_2_3 = m.m_2_3;
+            self.m_3_0 = m.m_3_0;
+            self.m_3_1 = m.m_3_1;
+            self.m_3_2 = m.m_3_2;
+            self.m_3_3 = m.m_3_3;
+        }
+
         pub fn translation(&mut self, x: f32, y: f32, z: f32) {
             self.identity();
 
@@ -282,12 +321,6 @@
             self.m_3_2 = m32;
             self.m_3_3 = m33;
         }
-        //public Matrix4 multAssign(Matrix4 that) {
-    }
-
-
-    #[allow(dead_code)]
-    impl Matrix4 {
 
         pub fn mult_to_vec4(&self, vec: &mut Vector4) {
             let nx = vec.x * self.m_0_0 + vec.y * self.m_1_0 + vec.z * self.m_2_0 + vec.w * self.m_3_0;
@@ -301,6 +334,15 @@
             vec.w = nw;
         }
 
+        pub fn mult_to_vec3(&self, vec: &mut Vector3, w:f32) {
+            let nx = vec.x * self.m_0_0 + vec.y * self.m_1_0 + vec.z * self.m_2_0 + w * self.m_3_0;
+            let ny = vec.x * self.m_0_1 + vec.y * self.m_1_1 + vec.z * self.m_2_1 + w * self.m_3_1;
+            let nz = vec.x * self.m_0_2 + vec.y * self.m_1_2 + vec.z * self.m_2_2 + w * self.m_3_2;
+
+            vec.x = nx;
+            vec.y = ny;
+            vec.z = nz;
+        }
     }
 
 //}
