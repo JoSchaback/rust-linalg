@@ -1,33 +1,8 @@
 //! `js_linalg` is probably the smallest linear algebra library on the planet. It comes without dependencies,
 //! is very fast, uses no number abstraction traits (all `f32`) and tailored for usage with OpenGL/WebGL. 
-//! It implements four simple
-//! structs, this is all you need for a happy and fulfilled life:
-//! * `Vector3` - 
+//! It implements four structs; `Vector3`, `Vector4`, `Matrix3` and `Matrix4`. This is all you need for a happy and fulfilled life.
 //! 
-//! # Design Principles
-//! The mere purpose of `js_linalg` is to make the life of a computer graphics programmer easier.
-//! But not necessarily the life of a mathematician. That is why we keep things simple towards the the use-cases of
-//! setting up "view", "model-view", "projection" or "normal" matrices.
-//! The library intentionally drops the concepts of transpositions or generalizations such as for example 
-//! regarding 3-dimensional vectors as 1x3 matrices. Instead, the library has the concept of explicit 
-//! 3D and 4D vectors ("columns matrices" for the mathematically inclined reader) and
-//! hard-wired 3x3 and 4x4 matrices. This means you may apply 3x3 matrices onto any 3D vector as well as 4x4 matrices onto any
-//! 4D vector.
-//!  
-//! As a user of this library you need to keep track of transpositions yourselve. 
-//! There are other libraries that cover transformations and 
-//! 
-//! `js_linalg` contains vector and matrix implementations of different
-//! dimensions, but all with 
-//! - explicit fields (no arrays) which makes it easier for look-ahead optimizations to take place,
-//! - matrix component order that is aligned with OpenGL for simple as fast uploading, and
-//! - all fields are `f32`'s as this is sufficient precision while small enough for most *GL applications.
-//! 
-//! # Main structs
-//! `js_linalg` consists of the following central structs that are instrumental.
-//! - `Vector3`: A three dimensional vector. Commonly used. Bascially stuff that you remember from school.
-//! - `Vector4`: A four dimensional vector, usually used rarley except for exotic multiplications with 4x4 matrices.
-//! - `Matrix3`
+//! Please find more info in the README.md.
 
 /// Three dimensional vector of `f32`'s. 
 /// The three dimensions are accessible through the fields `x`, `y` and `z`.
