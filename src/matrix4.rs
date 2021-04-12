@@ -53,9 +53,9 @@ impl Matrix4 {
             }
         }
 
-    pub fn rotation_mut(&mut self, alpha: f32, u : &Vector3) {
+    pub fn set_rotation(&mut self, alpha: f32, u : &Vector3) {
 
-        self.set_identity(); // TODO necessary? I think all values get overriden anyways later
+        self.identity_mut(); // TODO necessary? I think all values get overriden anyways later
 
         let c = f32::cos(alpha);
         let s = f32::sin(alpha);
@@ -76,7 +76,7 @@ impl Matrix4 {
         self.m_0_3 = 0.0;
     }
 
-    pub fn set_identity(&mut self) -> &mut Matrix4 {
+    pub fn identity_mut(&mut self) -> &mut Matrix4 {
         self.m_0_0 = 1.0;
         self.m_1_0 = 0.0;
         self.m_2_0 = 0.0;
@@ -103,7 +103,7 @@ impl Matrix4 {
     pub fn frustum_mut(&mut self, left: f32, right: f32, bottom: f32, top: f32, near: f32, far: f32) {
         // http://www.songho.ca/opengl/gl_projectionmatrix.html
 
-        self.set_identity();
+        self.identity_mut();
 
         self.m_0_0 = (2.0 * near) / (right - left);
         self.m_2_0 = (right + left) / (right - left);
@@ -256,7 +256,7 @@ impl Matrix4 {
     }
 
     pub fn set_translation(&mut self, x: f32, y: f32, z: f32) -> &mut Matrix4 {
-        self.set_identity();
+        self.identity_mut();
 
         // fourth column
         self.m_3_0 = x;
@@ -304,7 +304,7 @@ impl Matrix4 {
         v.set_vector3(&w).cross_mut(&u).normalize_mut();
         ////v.set(w).cross(u).normalize();
 
-        self.set_identity();
+        self.identity_mut();
 
         self.set_row(0, u.x, u.y, u.z, 0.0);
         self.set_row(1, v.x, v.y, v.z, 0.0);
