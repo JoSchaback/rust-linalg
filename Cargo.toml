@@ -1,8 +1,14 @@
 [package]
-name = "linalg"
+name = "js_linalg"
 version = "0.1.0"
 authors = ["Johannes Schaback <johannes@schaback.com>"]
 edition = "2018"
+repository = "https://github.com/schabby/rust-linalg.git"
+homepage = "https://github.com/schabby/rust-linalg.git"
+license = "MIT"
+readme = "README.md"
+documentation = "https://github.com/schabby/rust-linalg.git"
+description = "Simple but fast linear algebra library tailored for usage with OpenGL / WebGL."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
