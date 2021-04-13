@@ -28,32 +28,33 @@ impl Matrix4 {
         }
     }
 
-        /// Createa a new `Matrix4`struct, initialized as identity matrix.
-        pub fn from_matrix4(m:&Matrix4) -> Matrix4 {
-            Matrix4 {
-                m_0_0: m.m_0_0,
-                m_1_0: m.m_1_0,
-                m_2_0: m.m_2_0,
-                m_3_0: m.m_3_0,
-    
-                m_0_1: m.m_0_1,
-                m_1_1: m.m_1_1,
-                m_2_1: m.m_2_1,
-                m_3_1: m.m_3_1,
-    
-                m_0_2: m.m_0_2,
-                m_1_2: m.m_1_2,
-                m_2_2: m.m_2_2,
-                m_3_2: m.m_3_2,
-    
-                m_0_3: m.m_0_3,
-                m_1_3: m.m_1_3,
-                m_2_3: m.m_2_3,
-                m_3_3: m.m_3_3,
-            }
-        }
+    /// Createa a new `Matrix4`struct, initialized as identity matrix.
+    pub fn from_matrix4(m:&Matrix4) -> Matrix4 {
+        Matrix4 {
+            m_0_0: m.m_0_0,
+            m_1_0: m.m_1_0,
+            m_2_0: m.m_2_0,
+            m_3_0: m.m_3_0,
 
-    pub fn set_rotation(&mut self, alpha: f32, u : &Vector3) {
+            m_0_1: m.m_0_1,
+            m_1_1: m.m_1_1,
+            m_2_1: m.m_2_1,
+            m_3_1: m.m_3_1,
+
+            m_0_2: m.m_0_2,
+            m_1_2: m.m_1_2,
+            m_2_2: m.m_2_2,
+            m_3_2: m.m_3_2,
+
+            m_0_3: m.m_0_3,
+            m_1_3: m.m_1_3,
+            m_2_3: m.m_2_3,
+            m_3_3: m.m_3_3,
+        }
+    }
+
+    /// Sets the matrix to a rotation matrix around the provided vector.
+    pub fn rotation_mut(&mut self, alpha: f32, u : &Vector3) {
 
         self.identity_mut(); // TODO necessary? I think all values get overriden anyways later
 
@@ -76,6 +77,7 @@ impl Matrix4 {
         self.m_0_3 = 0.0;
     }
 
+    /// Sets the matrix to identity.
     pub fn identity_mut(&mut self) -> &mut Matrix4 {
         self.m_0_0 = 1.0;
         self.m_1_0 = 0.0;
@@ -100,8 +102,12 @@ impl Matrix4 {
         self
     }
 
+    /// Sets the matrix to a frustum projection. 
+    /// 
+    /// # Further Details
+    /// Please see here for more info on frustrum matrices: http://www.songho.ca/opengl/gl_projectionmatrix.html
     pub fn frustum_mut(&mut self, left: f32, right: f32, bottom: f32, top: f32, near: f32, far: f32) {
-        // http://www.songho.ca/opengl/gl_projectionmatrix.html
+        // 
 
         self.identity_mut();
 
@@ -167,8 +173,11 @@ impl Matrix4 {
         };
     }
 
+    /// Set the matrix to a projection matrix.
+    /// 
+    /// # Further Details
+    /// Please see here for more details: http://www.geeks3d.com/20090729/howto-perspective-projection-matrix-in-opengl/
     pub fn projection_mut(&mut self, view_angle: f32, width: f32, height: f32, near_clipping_plane: f32, far_clipping_plane: f32) {
-        // http://www.geeks3d.com/20090729/howto-perspective-projection-matrix-in-opengl/
         use std::f32::consts::PI;
         let radians: f32 = view_angle * PI / 180.0;
         let half_height = f32::tan(radians / 2.0) * near_clipping_plane;
@@ -176,6 +185,7 @@ impl Matrix4 {
         self.frustum_mut(-half_scaled_aspect_ratio, half_scaled_aspect_ratio, -half_height, half_height, near_clipping_plane, far_clipping_plane);
     }
 
+    /// Sets this matrix to a scaling matrix.
     pub fn scale_mut(&mut self, x: f32, y: f32, z: f32) {
         self.m_0_0 = x;
         self.m_1_0 = 0.0;
@@ -198,6 +208,7 @@ impl Matrix4 {
         self.m_3_3 = 1.0;
     }
 
+    /// Adds a provided matrix to this matrix in-place.
     pub fn add_mut_matrix4(&mut self, m:&Matrix4) {
         self.m_0_0 += m.m_0_0;
         self.m_0_1 += m.m_0_1;
@@ -217,6 +228,7 @@ impl Matrix4 {
         self.m_3_3 += m.m_3_3;
     }
 
+    /// Subtracts a provided matrix from this matrix in-place.
     pub fn sub_mut_matrix4(&mut self, m:&Matrix4) {
         self.m_0_0 -= m.m_0_0;
         self.m_0_1 -= m.m_0_1;
@@ -236,6 +248,7 @@ impl Matrix4 {
         self.m_3_3 -= m.m_3_3;
     }
 
+    /// "Copies" the provided matrix components onto this matrix. 
     pub fn set_matrix4(&mut self, m:&Matrix4) {
         self.m_0_0 = m.m_0_0;
         self.m_0_1 = m.m_0_1;
@@ -255,7 +268,8 @@ impl Matrix4 {
         self.m_3_3 = m.m_3_3;
     }
 
-    pub fn set_translation(&mut self, x: f32, y: f32, z: f32) -> &mut Matrix4 {
+    /// Sets this matrix to a translation matrix.
+    pub fn translation_mut(&mut self, x: f32, y: f32, z: f32) -> &mut Matrix4 {
         self.identity_mut();
 
         // fourth column
