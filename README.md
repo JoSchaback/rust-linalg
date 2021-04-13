@@ -82,3 +82,9 @@ It may be that there is something missing. Please feel free to reach out to me o
 - `Matrix3`: A 3x3 matrix with all you need for a happy and fulfilled life.
 - `Matrix4`: A 4x4 matrix with all you need for a happy and fulfilled life.
 
+## How to build
+The project the standard project setup for Rust. It requires a recent Rust installation. A simple
+```
+>cargo build
+```
+is enough to build the project. With `cargo test` you may run an array of tests included in `js_linalg`.
